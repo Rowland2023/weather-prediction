@@ -1,1 +1,35 @@
-node_modules
+# 🔒 Environment files
+.env
+
+# 🐍 Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.sqlite3
+
+# 🐳 Docker artifacts
+*.log
+logs/
+*.pid
+
+# 📦 Node modules
+node_modules/
+npm-debug.log
+
+# 🧪 Virtual environments
+venv/
+env/
+
+# 🧾 OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 🧬 Git
+.git/
+.gitignore
+

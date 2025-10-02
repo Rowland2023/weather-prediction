@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # Set working directory
-WORKDIR /WEATHER-FOCAST
+WORKDIR /Weather-Focast
 
 # Copy package files and install dependencies
 COPY package*.json ./
