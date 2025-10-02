@@ -3,143 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Assistant</title>
-    <!-- Load Tailwind CSS and configure Inter font -->
+    <title>Unified Utility Test App</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#6d28d9', // Deep Purple
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Ensure the layout is centered and respects the small width constraint */
-            display: flex;
-            justify-content: center;
-        }
-        /* Custom styling for the dark mode toggle switch track and thumb */
-        #darkToggle:checked + span span {
-            transform: translateX(100%);
-            background-color: #3b82f6; /* Blue for 'on' state */
-        }
-        #darkToggle + span {
-            transition: background-color 0.3s;
-        }
-        #darkToggle:checked + span {
-             background-color: #60a5fa; /* Lighter blue track for 'on' state */
-        }
+        /* Custom styles for appearance */
+        body { font-family: 'Inter', sans-serif; }
+        .transition-all { transition: all 0.3s ease-in-out; }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-500 p-4 w-[320px]">
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen p-4 sm:p-8 transition-colors">
 
-    <!-- Main Card Container: Provides a clean, modern look -->
-    <div class="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl space-y-5">
+    <div class="max-w-xl mx-auto space-y-8 p-6 sm:p-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700">
+        
+        <!-- Header & Dark Mode Toggle -->
+        <header class="flex justify-between items-center pb-4 border-b dark:border-gray-700">
+            <h1 class="text-3xl font-extrabold text-primary dark:text-purple-400">Utility Tester</h1>
+            <div class="flex items-center space-x-3">
+                <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Dark Mode</span>
+                <label for="darkToggle" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="darkToggle" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+                </label>
+            </div>
+        </header>
 
-        <!-- Header and Dark Mode Toggle -->
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
-                ✈️ Travel Assistant
-            </h1>
-            <label class="flex items-center cursor-pointer">
-                <input type="checkbox" id="darkToggle" class="hidden">
-                <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-                    <!-- Sun/Moon icons for better visual feedback -->
-                    <span class="bg-yellow-400 w-3 h-3 rounded-full absolute transition-transform duration-300 ease-in-out dark:translate-x-full dark:bg-gray-200">
-                        <span class="absolute text-xs" style="left: -1px; top: -1px;">☀️</span>
-                    </span>
-                    <span class="bg-gray-500 w-3 h-3 rounded-full absolute transition-transform duration-300 ease-in-out translate-x-full dark:translate-x-0 dark:bg-white">
-                        <span class="absolute text-xs" style="left: -1px; top: -1px;">🌙</span>
-                    </span>
-                </span>
-            </label>
-        </div>
-
-        <hr class="border-gray-200 dark:border-gray-700">
-
-        <!-- 1. Weather and Airport Section -->
-        <section class="space-y-3">
-            <h2 class="text-lg font-semibold text-blue-500 dark:text-blue-400">Weather & Airports</h2>
+        <section class="space-y-6">
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 border-b pb-2 dark:border-gray-700">Test Utility Functions</h2>
             
-            <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">City / Location:</label>
-            <input type="text" id="city" list="cityList" placeholder="e.g. Lagos, New York"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition">
-            <datalist id="cityList">
-                <option value="Lagos"><option value="Abuja"><option value="London"><option value="New York"><option value="Tokyo">
-            </datalist>
-
-            <!-- Action Buttons for this section -->
-            <div class="flex space-x-2">
-                <button id="getWeatherBtn"
-                    class="flex-1 flex items-center justify-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                    <span class="mr-2">☁️</span> Get Weather
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Toast Notification Test -->
+                <button id="toastBtn" class="w-full py-3 px-4 bg-primary text-white font-bold rounded-lg hover:bg-purple-700 transition-all shadow-md active:scale-[0.98]">
+                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.33A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.57 3.541.936 5.454 1.33m4.842 0A22.885 22.885 0 0112 20.25c-5.103 0-10.053-1.1-14.938-3.328m4.842 0A2.25 2.25 0 0015 21a2.25 2.25 0 002.25-2.25m-4.5 0A2.25 2.25 0 019.75 21a2.25 2.25 0 01-2.25-2.25m4.5 0a2.25 2.25 0 002.25-2.25m-4.5 0a2.25 2.25 0 01-2.25-2.25" /></svg> Show Toast</span>
                 </button>
-                <button id="lookupAirportBtn"
-                    class="flex-1 flex items-center justify-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                    <span class="mr-2">📍</span> Lookup Airport
+
+                <!-- Voice Assistant Test -->
+                <button id="speakBtn" class="w-full py-3 px-4 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition-all shadow-md active:scale-[0.98]">
+                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5v1.5m-6-1.5v1.5m6-7.5a4.5 4.5 0 10-4.5-4.5m4.5 4.5V12m0 0L8.25 8.25m3.75 3.75L15.75 8.25" /></svg> Speak Message</span>
+                </button>
+
+                <!-- Spinner/Loader Test -->
+                <button id="loaderBtn" class="w-full py-3 px-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-all shadow-md active:scale-[0.98] col-span-1 sm:col-span-2">
+                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m-4.5.912l-1.59 1.59m-2.25 3.75h2.25m-.912 4.5l1.59-1.59m3.75 2.25V18m4.5-.912l1.59 1.59m2.25-3.75h-2.25m.912-4.5l-1.59-1.59M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg> Show Loader for 4s</span>
                 </button>
             </div>
-            
-            <!-- Result Containers -->
-            <div id="weatherResult" class="text-sm bg-blue-50 dark:bg-gray-700 p-3 rounded-lg border border-blue-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-            <div id="airportResult" class="text-sm bg-purple-50 dark:bg-gray-700 p-3 rounded-lg border border-purple-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-            
-            <!-- Forecast Carousel -->
-            <div id="forecastCarousel" class="mt-4 flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">
-                <!-- Forecast items will be injected here -->
+
+            <!-- Loader Target Area -->
+            <div id="loaderTarget" class="mt-4 h-20 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-xl transition-opacity duration-300 opacity-0 text-center text-gray-800 dark:text-gray-200">
+                <!-- Loader content will appear here -->
             </div>
         </section>
 
-        <hr class="border-gray-200 dark:border-gray-700">
+    </div>
 
-        <!-- 2. Flight Booking and Info Section -->
-        <section class="space-y-3">
-            <h2 class="text-lg font-semibold text-green-500 dark:text-green-400">Booking & Status</h2>
+    <script>
+        // ==========================================================================================
+        // UTILITY FUNCTIONS (All code is now self-contained in this single <script> block)
+        // ==========================================================================================
+        
+        // --- TOAST NOTIFICATION ---
 
-            <!-- Input Group: Destination and Date -->
-            <div class="space-y-3">
-                <label for="destination" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Destination:</label>
-                <input type="text" id="destination" placeholder="e.g. New York"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white transition">
+        /**
+         * Displays a non-blocking toast notification.
+         * @param {string} message The message to display.
+         */
+        function showToast(message) {
+            // Cleanup any existing toast immediately
+            document.querySelectorAll('.toast-notification').forEach(t => t.remove());
 
-                <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date:</label>
-                <input type="date" id="date"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white transition">
-            </div>
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-primary text-white px-5 py-3 rounded-xl shadow-2xl opacity-0 transition-opacity duration-300 z-50 text-base font-semibold max-w-xs text-center';
+            toast.textContent = message;
+            document.body.appendChild(toast);
 
-            <button id="bookFlightBtn"
-                class="w-full flex items-center justify-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">🎫</span> Book Flight
-            </button>
+            // Show toast after a slight delay to ensure transition works
+            setTimeout(() => toast.classList.add('opacity-100'), 50);
+
+            // Hide and remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                // Wait for the transition duration (300ms) before removing the element
+                setTimeout(() => toast.remove(), 350);
+            }, 3000);
+        }
+
+        // --- VOICE ASSISTANT ---
+
+        /**
+         * Uses the Web Speech API to read the given text aloud.
+         * @param {string} text The text to speak.
+         */
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                // Stop any currently speaking utterance
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
+                }
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US'; 
+                speechSynthesis.speak(utterance);
+            } else {
+                showToast("Speech synthesis is not supported in this browser.");
+            }
+        }
+
+        // --- LOADING SPINNER ---
+
+        /**
+         * Displays a spinner loader inside the target div and makes it visible.
+         * @param {HTMLElement} targetDiv The result container where the spinner should be displayed.
+         */
+        function showSpinner(targetDiv) {
+            if (!targetDiv) return;
+            // Clear content first in case there was previous error/message
+            targetDiv.innerHTML = '';
+            targetDiv.innerHTML = '<div class="spinner w-6 h-6 border-4 border-gray-300 border-t-primary rounded-full animate-spin mx-auto"></div><p class="text-sm dark:text-gray-400 mt-2">Working on it...</p>';
+            targetDiv.classList.remove('opacity-0');
+            targetDiv.classList.add('opacity-100');
+        }
+
+        /**
+         * Hides the spinner by clearing the target div content and setting opacity to 0.
+         * @param {HTMLElement} targetDiv The result container to clear.
+         */
+        function hideSpinner(targetDiv) {
+            if (!targetDiv) return;
+            targetDiv.classList.remove('opacity-100');
+            targetDiv.classList.add('opacity-0');
+            // Clear content after hiding animation
+            setTimeout(() => targetDiv.innerHTML = '', 300); 
+        }
+
+        // --- DARK MODE TOGGLE ---
+
+        /**
+         * Initializes the dark mode toggle functionality using localStorage.
+         */
+        function setupDarkMode() {
+            const darkToggle = document.getElementById('darkToggle');
+            if (!darkToggle) return; 
             
-            <div id="bookingResult" class="text-sm bg-green-50 dark:bg-gray-700 p-3 rounded-lg border border-green-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-
-            <!-- Map Preview (kept minimal but styled) -->
-            <div id="mapPreview" class="pt-2">
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Destination Map Preview:</p>
-                <iframe id="mapFrame" class="w-full h-32 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700" loading="lazy"></iframe>
-            </div>
-
-            <!-- Flight Status Check -->
-            <label for="flightNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 pt-2">Flight Number:</label>
-            <input type="text" id="flightNumber" placeholder="e.g. NG101"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white transition">
-
-            <button id="getStatusBtn"
-                class="w-full flex items-center justify-center bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">🕒</span> Check Status
-            </button>
+            // Check local storage for dark mode preference
+            const storedPreference = localStorage.getItem('darkMode');
             
-            <div id="statusResult" class="text-sm bg-indigo-50 dark:bg-gray-700 p-3 rounded-lg border border-indigo-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
+            // Determine initial state: stored preference OR system preference if none is stored
+            let isDarkMode = false;
+            if (storedPreference === 'true') {
+                isDarkMode = true;
+            } else if (storedPreference === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                isDarkMode = true;
+            }
 
-            <!-- Travel Tips Section -->
-            <button id="getTipsBtn"
-                class="w-full flex items-center justify-center bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">💡</span> Get Travel Tips
-            </button>
+            // Apply initial state
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                darkToggle.checked = true;
+                localStorage.setItem('darkMode', 'true'); // Ensure preference is saved if it came from system
+            } else {
+                document.documentElement.classList.remove('dark');
+                darkToggle.checked = false;
+                localStorage.setItem('darkMode', 'false');
+            }
+
+            // Set up change listener
+            darkToggle.addEventListener('change', () => {
+                if (darkToggle.checked) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('darkMode', 'true');
+                    showToast('🌚 Switched to Dark Mode');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('darkMode', 'false');
+                    showToast('☀️ Switched to Light Mode');
+                }
+            });
+        }
+        
+        // --- EVENT LISTENERS (Main App Logic) ---
+        
+        window.onload = () => {
+            setupDarkMode();
             
-            <div id="tipsResult" class="text-sm bg-yellow-50 dark:bg-gray-700 p-3 rounded-lg border border-yellow-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-        </section>
+            const toastBtn = document.getElementById('toastBtn');
+            const speakBtn = document.getElementById('speakBtn');
+            const loaderBtn = document.getElementById('loaderBtn');
+            const loaderTarget = document.getElementById('loaderTarget');
 
-    </div> <!-- End Main Card Container -->
+            toastBtn.addEventListener('click', () => {
+                showToast("Your notification system is working perfectly!");
+            });
 
-    <!-- Modular Scripts: CORRECTED PATH -->
-    <script type="module" src="./main.js"></script>
+            speakBtn.addEventListener('click', () => {
+                const message = "The voice assistant is now active. I can speak for your application.";
+                speak(message);
+                showToast("Voice assistant activated.");
+            });
+
+            loaderBtn.addEventListener('click', () => {
+                showSpinner(loaderTarget);
+                // Clear the target before adding text, but after showSpinner clears content
+                loaderTarget.innerHTML += '<p class="mt-2 text-sm text-gray-500 dark:text-gray-300">Simulating a 4-second API call...</p>';
+                
+                // Hide the spinner after 4 seconds
+                setTimeout(() => {
+                    hideSpinner(loaderTarget);
+                    showToast("Loader test complete!");
+                }, 4000);
+            });
+        };
+    </script>
 </body>
 </html>
