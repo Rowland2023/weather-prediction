@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: weather-frontend
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: FLASK_BACKEND_URL
+        value: https://flight-booking-y6l6.onrender.com
