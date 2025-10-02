@@ -1,5 +1,5 @@
 // status.js
-import { showToast } from './utils.js';
+import { showToast } from './popoup/utils.js';
 
 export function setupFlightStatus() {
   const statusBtn = document.getElementById('getStatusBtn');

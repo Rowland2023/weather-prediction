@@ -1,12 +1,12 @@
 // main.js
-import { showToast } from './utils.js';
+import { showToast } from './popoup/utils.js';
 import { setupWeatherHandler } from './weather.js';
 import { setupBookingHandler } from './booking.js';
 import { setupWeatherHandler } from './weather.js';
 import { setupBookingHandler } from './booking.js';
 import { setupAirportLookup } from './airport.js';
-import { setupTravelTips } from './tips.js';
-import { setupFlightStatus } from './status.js';
+import { setupTravelTips } from './popoup/tips.js';
+import { setupFlightStatus } from './popoup/status.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const dateInput = document.getElementById('date');

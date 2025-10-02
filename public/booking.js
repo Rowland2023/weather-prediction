@@ -1,5 +1,5 @@
 // booking.js
-import { showToast, speak, showSpinner } from './utils.js';
+import { showToast, speak, showSpinner } from './popoup/utils.js';
 
 export function setupBookingHandler() {
   const bookBtn = document.getElementById('bookFlightBtn');

@@ -1,5 +1,5 @@
 // tips.js
-import { showToast } from './utils.js';
+import { showToast } from './popoup/utils.js';
 
 export function setupTravelTips() {
   const tipsBtn = document.getElementById('getTipsBtn');

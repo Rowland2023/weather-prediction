@@ -1,5 +1,5 @@
 // airport.js
-import { showToast } from './utils.js';
+import { showToast } from './popoup/utils.js';
 
 export function setupAirportLookup() {
   const airportBtn = document.getElementById('lookupAirportBtn');

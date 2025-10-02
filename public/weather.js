@@ -1,5 +1,5 @@
 // weather.js
-import { showToast, speak, showSpinner, iconMap } from './utils.js';
+import { showToast, speak, showSpinner, iconMap } from './popoup/utils.js';
 
 export function setupWeatherHandler() {
   const weatherBtn = document.getElementById('getWeatherBtn');
