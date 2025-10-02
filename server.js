@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve popup.html at root
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'popup', 'popup.html'));
+  res.sendFile(path.join(__dirname, 'public', 'popup.html'));
 });
 
 // Proxy API requests to Flask backend
