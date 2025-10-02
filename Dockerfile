@@ -14,5 +14,5 @@ COPY . .
 # Expose port
 EXPOSE 3000
 
-# Start the app from Frontend/server.js
-CMD ["node", "Frontend/server.js"]
+# Start the app from root-level server.js
+CMD ["node", "server.js"]
