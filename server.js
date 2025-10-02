@@ -5,9 +5,13 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files
+// Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/popup', express.static(path.join(__dirname, 'popup')));
+
+// Serve popup.html at root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'popup', 'popup.html'));
+});
 
 // Proxy API requests to Flask backend
 app.use('/api', createProxyMiddleware({
