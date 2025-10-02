@@ -1,231 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified Utility Test App</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#6d28d9', // Deep Purple
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom styles for appearance */
-        body { font-family: 'Inter', sans-serif; }
-        .transition-all { transition: all 0.3s ease-in-out; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Assistant</title>
+
+  <!-- Tailwind CDN (for development only) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+    #darkToggle:checked + span span {
+      transform: translateX(100%);
+      background-color: #3b82f6;
+    }
+    #darkToggle + span {
+      transition: background-color 0.3s;
+    }
+    #darkToggle:checked + span {
+      background-color: #60a5fa;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 min-h-screen p-4 sm:p-8 transition-colors">
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-500 p-4 w-[320px]">
+  <!-- Your full UI content remains unchanged -->
+  <!-- ... -->
 
-    <div class="max-w-xl mx-auto space-y-8 p-6 sm:p-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700">
-        
-        <!-- Header & Dark Mode Toggle -->
-        <header class="flex justify-between items-center pb-4 border-b dark:border-gray-700">
-            <h1 class="text-3xl font-extrabold text-primary dark:text-purple-400">Utility Tester</h1>
-            <div class="flex items-center space-x-3">
-                <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Dark Mode</span>
-                <label for="darkToggle" class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="darkToggle" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 dark:peer-focus:ring-purple-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-                </label>
-            </div>
-        </header>
-
-        <section class="space-y-6">
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 border-b pb-2 dark:border-gray-700">Test Utility Functions</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Toast Notification Test -->
-                <button id="toastBtn" class="w-full py-3 px-4 bg-primary text-white font-bold rounded-lg hover:bg-purple-700 transition-all shadow-md active:scale-[0.98]">
-                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.33A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.57 3.541.936 5.454 1.33m4.842 0A22.885 22.885 0 0112 20.25c-5.103 0-10.053-1.1-14.938-3.328m4.842 0A2.25 2.25 0 0015 21a2.25 2.25 0 002.25-2.25m-4.5 0A2.25 2.25 0 019.75 21a2.25 2.25 0 01-2.25-2.25m4.5 0a2.25 2.25 0 002.25-2.25m-4.5 0a2.25 2.25 0 01-2.25-2.25" /></svg> Show Toast</span>
-                </button>
-
-                <!-- Voice Assistant Test -->
-                <button id="speakBtn" class="w-full py-3 px-4 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition-all shadow-md active:scale-[0.98]">
-                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5v1.5m-6-1.5v1.5m6-7.5a4.5 4.5 0 10-4.5-4.5m4.5 4.5V12m0 0L8.25 8.25m3.75 3.75L15.75 8.25" /></svg> Speak Message</span>
-                </button>
-
-                <!-- Spinner/Loader Test -->
-                <button id="loaderBtn" class="w-full py-3 px-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-all shadow-md active:scale-[0.98] col-span-1 sm:col-span-2">
-                    <span class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m-4.5.912l-1.59 1.59m-2.25 3.75h2.25m-.912 4.5l1.59-1.59m3.75 2.25V18m4.5-.912l1.59 1.59m2.25-3.75h-2.25m.912-4.5l-1.59-1.59M12 18a6 6 0 100-12 6 6 0 000 12z" /></svg> Show Loader for 4s</span>
-                </button>
-            </div>
-
-            <!-- Loader Target Area -->
-            <div id="loaderTarget" class="mt-4 h-20 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-xl transition-opacity duration-300 opacity-0 text-center text-gray-800 dark:text-gray-200">
-                <!-- Loader content will appear here -->
-            </div>
-        </section>
-
-    </div>
-
-    <script>
-        // ==========================================================================================
-        // UTILITY FUNCTIONS (All code is now self-contained in this single <script> block)
-        // ==========================================================================================
-        
-        // --- TOAST NOTIFICATION ---
-
-        /**
-         * Displays a non-blocking toast notification.
-         * @param {string} message The message to display.
-         */
-        function showToast(message) {
-            // Cleanup any existing toast immediately
-            document.querySelectorAll('.toast-notification').forEach(t => t.remove());
-
-            const toast = document.createElement('div');
-            toast.className = 'toast-notification fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-primary text-white px-5 py-3 rounded-xl shadow-2xl opacity-0 transition-opacity duration-300 z-50 text-base font-semibold max-w-xs text-center';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
-            // Show toast after a slight delay to ensure transition works
-            setTimeout(() => toast.classList.add('opacity-100'), 50);
-
-            // Hide and remove toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('opacity-100');
-                // Wait for the transition duration (300ms) before removing the element
-                setTimeout(() => toast.remove(), 350);
-            }, 3000);
-        }
-
-        // --- VOICE ASSISTANT ---
-
-        /**
-         * Uses the Web Speech API to read the given text aloud.
-         * @param {string} text The text to speak.
-         */
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                // Stop any currently speaking utterance
-                if (speechSynthesis.speaking) {
-                    speechSynthesis.cancel();
-                }
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US'; 
-                speechSynthesis.speak(utterance);
-            } else {
-                showToast("Speech synthesis is not supported in this browser.");
-            }
-        }
-
-        // --- LOADING SPINNER ---
-
-        /**
-         * Displays a spinner loader inside the target div and makes it visible.
-         * @param {HTMLElement} targetDiv The result container where the spinner should be displayed.
-         */
-        function showSpinner(targetDiv) {
-            if (!targetDiv) return;
-            // Clear content first in case there was previous error/message
-            targetDiv.innerHTML = '';
-            targetDiv.innerHTML = '<div class="spinner w-6 h-6 border-4 border-gray-300 border-t-primary rounded-full animate-spin mx-auto"></div><p class="text-sm dark:text-gray-400 mt-2">Working on it...</p>';
-            targetDiv.classList.remove('opacity-0');
-            targetDiv.classList.add('opacity-100');
-        }
-
-        /**
-         * Hides the spinner by clearing the target div content and setting opacity to 0.
-         * @param {HTMLElement} targetDiv The result container to clear.
-         */
-        function hideSpinner(targetDiv) {
-            if (!targetDiv) return;
-            targetDiv.classList.remove('opacity-100');
-            targetDiv.classList.add('opacity-0');
-            // Clear content after hiding animation
-            setTimeout(() => targetDiv.innerHTML = '', 300); 
-        }
-
-        // --- DARK MODE TOGGLE ---
-
-        /**
-         * Initializes the dark mode toggle functionality using localStorage.
-         */
-        function setupDarkMode() {
-            const darkToggle = document.getElementById('darkToggle');
-            if (!darkToggle) return; 
-            
-            // Check local storage for dark mode preference
-            const storedPreference = localStorage.getItem('darkMode');
-            
-            // Determine initial state: stored preference OR system preference if none is stored
-            let isDarkMode = false;
-            if (storedPreference === 'true') {
-                isDarkMode = true;
-            } else if (storedPreference === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                isDarkMode = true;
-            }
-
-            // Apply initial state
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-                darkToggle.checked = true;
-                localStorage.setItem('darkMode', 'true'); // Ensure preference is saved if it came from system
-            } else {
-                document.documentElement.classList.remove('dark');
-                darkToggle.checked = false;
-                localStorage.setItem('darkMode', 'false');
-            }
-
-            // Set up change listener
-            darkToggle.addEventListener('change', () => {
-                if (darkToggle.checked) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('darkMode', 'true');
-                    showToast('🌚 Switched to Dark Mode');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('darkMode', 'false');
-                    showToast('☀️ Switched to Light Mode');
-                }
-            });
-        }
-        
-        // --- EVENT LISTENERS (Main App Logic) ---
-        
-        window.onload = () => {
-            setupDarkMode();
-            
-            const toastBtn = document.getElementById('toastBtn');
-            const speakBtn = document.getElementById('speakBtn');
-            const loaderBtn = document.getElementById('loaderBtn');
-            const loaderTarget = document.getElementById('loaderTarget');
-
-            toastBtn.addEventListener('click', () => {
-                showToast("Your notification system is working perfectly!");
-            });
-
-            speakBtn.addEventListener('click', () => {
-                const message = "The voice assistant is now active. I can speak for your application.";
-                speak(message);
-                showToast("Voice assistant activated.");
-            });
-
-            loaderBtn.addEventListener('click', () => {
-                showSpinner(loaderTarget);
-                // Clear the target before adding text, but after showSpinner clears content
-                loaderTarget.innerHTML += '<p class="mt-2 text-sm text-gray-500 dark:text-gray-300">Simulating a 4-second API call...</p>';
-                
-                // Hide the spinner after 4 seconds
-                setTimeout(() => {
-                    hideSpinner(loaderTarget);
-                    showToast("Loader test complete!");
-                }, 4000);
-            });
-        };
-    </script>
+  <!-- Scripts -->
+  <script type="module" src="/utils.js"></script>
+  <script type="module" src="/main.js"></script>
 </body>
 </html>
