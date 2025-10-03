@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Travel Assistant</title>
 
-  <!-- Link compiled Tailwind CSS -->
+  <!-- Tailwind CSS -->
   <link href="/output.css" rel="stylesheet" />
 
-  <!-- Load Inter font -->
+  <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -55,12 +55,15 @@
   <input type="text" id="flightNumber" class="input" placeholder="e.g. NG101" />
   <button id="checkStatusBtn" class="btn">🕒 Check Status</button>
 
-  <!-- Tips -->
+  <!-- Tips Section -->
   <button id="getTipsBtn" class="btn">💡 Get Travel Tips</button>
+  <div id="tipsResult" class="result opacity-0 transition-opacity duration-300"></div>
 
   <!-- Results -->
   <div id="weatherResult" class="result"></div>
   <div id="bookingResult" class="result"></div>
+  <div id="airportResult" class="result"></div>
+  <div id="statusResult" class="result"></div>
 
   <!-- Toast Notification -->
   <div id="toast" class="toast">Notification</div>
