@@ -14,11 +14,16 @@ app.get('/', (req, res) => {
 });
 
 // Proxy API requests to Flask backend
-app.use('/api', createProxyMiddleware({
-  target: 'https://flight-booking-y6l6.onrender.com',
-  changeOrigin: true
-}));
+fetch('https://flight-booking-y6l6.onrender.com/api/weather?city=Lagos')
+  .then(res => res.json())
+  .then(data => console.log(data))
+
 
 app.listen(PORT, () => {
   console.log(`Frontend running on port ${PORT}`);
+});
+
+app.use((req, res, next) => {
+  console.log(`🔁 Proxying: ${req.method} ${req.url}`);
+  next();
 });
