@@ -10,6 +10,7 @@
     "flask": "python3 Backend/app.py"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.14",
     "axios": "^1.12.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

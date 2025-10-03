@@ -1,145 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Assistant</title>
-    <!-- Load Tailwind CSS and configure Inter font -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Ensure the layout is centered and respects the small width constraint */
-            display: flex;
-            justify-content: center;
-        }
-        /* Custom styling for the dark mode toggle switch track and thumb */
-        #darkToggle:checked + span span {
-            transform: translateX(100%);
-            background-color: #3b82f6; /* Blue for 'on' state */
-        }
-        #darkToggle + span {
-            transition: background-color 0.3s;
-        }
-        #darkToggle:checked + span {
-             background-color: #60a5fa; /* Lighter blue track for 'on' state */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Assistant</title>
+
+  <!-- Link compiled Tailwind CSS -->
+  <link href="./output.css" rel="stylesheet" />
+
+  <!-- Load Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-500 p-4 w-[320px]">
+<body class="bg-gray-100 p-4 w-[300px] text-gray-800">
 
-    <!-- Main Card Container: Provides a clean, modern look -->
-    <div class="w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl space-y-5">
+  <h1 class="text-xl font-semibold text-center mb-4">✈️ Travel Assistant</h1>
 
-        <!-- Header and Dark Mode Toggle -->
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
-                ✈️ Travel Assistant
-            </h1>
-            <label class="flex items-center cursor-pointer">
-                <input type="checkbox" id="darkToggle" class="hidden">
-                <span class="w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300 ease-in-out">
-                    <!-- Sun/Moon icons for better visual feedback -->
-                    <span class="bg-yellow-400 w-3 h-3 rounded-full absolute transition-transform duration-300 ease-in-out dark:translate-x-full dark:bg-gray-200">
-                        <span class="absolute text-xs" style="left: -1px; top: -1px;">☀️</span>
-                    </span>
-                    <span class="bg-gray-500 w-3 h-3 rounded-full absolute transition-transform duration-300 ease-in-out translate-x-full dark:translate-x-0 dark:bg-white">
-                        <span class="absolute text-xs" style="left: -1px; top: -1px;">🌙</span>
-                    </span>
-                </span>
-            </label>
-        </div>
+  <!-- Weather Section -->
+  <label for="location">City / Location:</label>
+  <input type="text" id="location" class="input" placeholder="e.g. Lagos" />
+  <button id="getWeatherBtn" class="btn">☁️ Get Weather</button>
 
-        <hr class="border-gray-200 dark:border-gray-700">
+  <!-- Airport Lookup -->
+  <button id="lookupAirportBtn" class="btn mt-2">📍 Lookup Airport</button>
 
-        <!-- 1. Weather and Airport Section -->
-        <section class="space-y-3">
-            <h2 class="text-lg font-semibold text-blue-500 dark:text-blue-400">Weather & Airports</h2>
-            
-            <label for="city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">City / Location:</label>
-            <input type="text" id="city" list="cityList" placeholder="e.g. Lagos, New York"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition">
-            <datalist id="cityList">
-                <option value="Lagos"><option value="Abuja"><option value="London"><option value="New York"><option value="Tokyo">
-            </datalist>
+  <!-- Booking Section -->
+  <label for="destination">Destination:</label>
+  <input type="text" id="destination" class="input" placeholder="e.g. London" />
+  <label for="date">Date:</label>
+  <input type="date" id="date" class="input" />
+  <button id="bookFlightBtn" class="btn">🎫 Book Flight</button>
 
-            <!-- Action Buttons for this section -->
-            <div class="flex space-x-2">
-                <button id="getWeatherBtn"
-                    class="flex-1 flex items-center justify-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                    <span class="mr-2">☁️</span> Get Weather
-                </button>
-                <button id="lookupAirportBtn"
-                    class="flex-1 flex items-center justify-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                    <span class="mr-2">📍</span> Lookup Airport
-                </button>
-            </div>
-            
-            <!-- Result Containers -->
-            <div id="weatherResult" class="text-sm bg-blue-50 dark:bg-gray-700 p-3 rounded-lg border border-blue-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-            <div id="airportResult" class="text-sm bg-purple-50 dark:bg-gray-700 p-3 rounded-lg border border-purple-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-            
-            <!-- Forecast Carousel -->
-            <div id="forecastCarousel" class="mt-4 flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">
-                <!-- Forecast items will be injected here -->
-            </div>
-        </section>
+  <!-- Status Section -->
+  <label for="flightNumber">Flight Number:</label>
+  <input type="text" id="flightNumber" class="input" placeholder="e.g. NG101" />
+  <button id="checkStatusBtn" class="btn">🕒 Check Status</button>
 
-        <hr class="border-gray-200 dark:border-gray-700">
+  <!-- Tips -->
+  <button id="getTipsBtn" class="btn mt-2">💡 Get Travel Tips</button>
 
-        <!-- 2. Flight Booking and Info Section -->
-        <section class="space-y-3">
-            <h2 class="text-lg font-semibold text-green-500 dark:text-green-400">Booking & Status</h2>
+  <!-- Results -->
+  <div id="weatherResult" class="result"></div>
+  <div id="bookingResult" class="result"></div>
 
-            <!-- Input Group: Destination and Date -->
-            <div class="space-y-3">
-                <label for="destination" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Destination:</label>
-                <input type="text" id="destination" placeholder="e.g. New York"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white transition">
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Notification</div>
 
-                <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Date:</label>
-                <input type="date" id="date"
-                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white transition">
-            </div>
-
-            <button id="bookFlightBtn"
-                class="w-full flex items-center justify-center bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">🎫</span> Book Flight
-            </button>
-            
-            <div id="bookingResult" class="text-sm bg-green-50 dark:bg-gray-700 p-3 rounded-lg border border-green-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-
-            <!-- Map Preview (kept minimal but styled) -->
-            <div id="mapPreview" class="pt-2">
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Destination Map Preview:</p>
-                <iframe id="mapFrame" class="w-full h-32 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700" loading="lazy"></iframe>
-            </div>
-
-            <!-- Flight Status Check -->
-            <label for="flightNumber" class="block text-sm font-medium text-gray-700 dark:text-gray-300 pt-2">Flight Number:</label>
-            <input type="text" id="flightNumber" placeholder="e.g. NG101"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white transition">
-
-            <button id="getStatusBtn"
-                class="w-full flex items-center justify-center bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">🕒</span> Check Status
-            </button>
-            
-            <div id="statusResult" class="text-sm bg-indigo-50 dark:bg-gray-700 p-3 rounded-lg border border-indigo-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-
-            <!-- Travel Tips Section -->
-            <button id="getTipsBtn"
-                class="w-full flex items-center justify-center bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition shadow-md hover:shadow-lg transform hover:scale-[1.01]">
-                <span class="mr-2">💡</span> Get Travel Tips
-            </button>
-            
-            <div id="tipsResult" class="text-sm bg-yellow-50 dark:bg-gray-700 p-3 rounded-lg border border-yellow-200 dark:border-gray-600 shadow opacity-0 transition-opacity duration-500"></div>
-        </section>
-
-    </div> <!-- End Main Card Container -->
-
-    <!-- Modular Scripts: CORRECTED PATH -->
-    <script type="module" src="./main.js"></script>
+  <!-- Scripts -->
+  <script src="popup/utils.js"></script>
+  <script src="popup/airport.js"></script>
+  <script src="popup/booking.js"></script>
+  <script src="popup/main.js"></script>
+  <script src="popup/status.js"></script>
+  <script src="popup/tips.js"></script>
+  <script src="popup/weather.js"></script>
 </body>
 </html>
