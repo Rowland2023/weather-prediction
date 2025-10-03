@@ -55,3 +55,16 @@ export function speak(text) {
     console.warn('Speech synthesis not supported in this browser.');
   }
 }
+
+export const iconMap = {
+  Sunny: '☀️',
+  Cloudy: '☁️',
+  Rain: '🌧️',
+  Thunderstorm: '⛈️',
+  Snow: '❄️',
+  Fog: '🌫️',
+  Windy: '💨',
+  Clear: '🌞',
+  PartlyCloudy: '⛅',
+  Default: '🌍'
+};
