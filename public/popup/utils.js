@@ -31,3 +31,27 @@ export function hideResult(id) {
   const el = document.getElementById(id);
   el.style.opacity = 0;
 }
+
+export function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+export function showSpinner(targetElement) {
+  const spinner = document.createElement("div");
+  spinner.className = "spinner";
+  targetElement.appendChild(spinner);
+}
+
+export function speak(text) {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    speechSynthesis.speak(utterance);
+  } else {
+    console.warn('Speech synthesis not supported in this browser.');
+  }
+}
