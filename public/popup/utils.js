@@ -1,5 +1,3 @@
-// utils.js
-
 export function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', {
@@ -51,8 +49,6 @@ export function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
     speechSynthesis.speak(utterance);
-  } else {
-    console.warn('Speech synthesis not supported in this browser.');
   }
 }
 
