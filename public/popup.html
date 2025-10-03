@@ -6,13 +6,28 @@
   <title>Travel Assistant</title>
 
   <!-- Link compiled Tailwind CSS -->
-  <link href="./output.css" rel="stylesheet" />
+  <link href="/output.css" rel="stylesheet" />
 
   <!-- Load Inter font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
+    }
+    .input {
+      @apply w-full p-2 mt-1 border border-gray-300 rounded;
+    }
+    .btn {
+      @apply w-full bg-blue-600 text-white py-2 rounded mt-2 hover:bg-blue-800;
+    }
+    .result {
+      @apply mt-3 p-2 bg-gray-200 rounded text-sm;
+    }
+    .toast {
+      @apply fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded opacity-0 transition-opacity duration-500 z-50;
+    }
+    .toast.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -26,7 +41,7 @@
   <button id="getWeatherBtn" class="btn">☁️ Get Weather</button>
 
   <!-- Airport Lookup -->
-  <button id="lookupAirportBtn" class="btn mt-2">📍 Lookup Airport</button>
+  <button id="lookupAirportBtn" class="btn">📍 Lookup Airport</button>
 
   <!-- Booking Section -->
   <label for="destination">Destination:</label>
@@ -41,7 +56,7 @@
   <button id="checkStatusBtn" class="btn">🕒 Check Status</button>
 
   <!-- Tips -->
-  <button id="getTipsBtn" class="btn mt-2">💡 Get Travel Tips</button>
+  <button id="getTipsBtn" class="btn">💡 Get Travel Tips</button>
 
   <!-- Results -->
   <div id="weatherResult" class="result"></div>
@@ -51,12 +66,12 @@
   <div id="toast" class="toast">Notification</div>
 
   <!-- Scripts -->
-  <script src="popup/utils.js"></script>
-  <script src="popup/airport.js"></script>
-  <script src="popup/booking.js"></script>
-  <script src="popup/main.js"></script>
-  <script src="popup/status.js"></script>
-  <script src="popup/tips.js"></script>
-  <script src="popup/weather.js"></script>
+  <script src="/popup/utils.js"></script>
+  <script src="/popup/airport.js"></script>
+  <script src="/popup/booking.js"></script>
+  <script src="/popup/main.js"></script>
+  <script src="/popup/status.js"></script>
+  <script src="/popup/tips.js"></script>
+  <script src="/popup/weather.js"></script>
 </body>
 </html>
