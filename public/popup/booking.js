@@ -13,13 +13,11 @@ export function setupBookingHandler() {
     if (resultDiv) showSpinner(resultDiv);
 
     try {
-      const res = await fetch('https://flight-booking-y6l6.onrender.com/api/book-flight', {
+      const res = await fetch('/api/book-flight', {
         method: 'POST',
-        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ location, date })
       });
-
       if (!res.ok) throw new Error('Network error');
       const data = await res.json();
       const details = data.details || {};

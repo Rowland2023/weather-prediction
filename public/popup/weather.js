@@ -15,11 +15,7 @@ export function setupWeatherHandler() {
     resultDiv.innerHTML = '';
 
     try {
-      const res = await fetch(`https://flight-booking-y6l6.onrender.com/api/weather?city=${encodeURIComponent(city)}`, {
-        method: 'GET',
-        mode: 'cors'
-      });
-
+      const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
       if (!res.ok) throw new Error('Network error');
       const data = await res.json();
       const icon = iconMap[data.condition] || iconMap.Default;
