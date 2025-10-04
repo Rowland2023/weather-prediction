@@ -14,7 +14,11 @@ export function setupFlightStatus() {
     resultDiv.innerHTML = '📡 Checking flight status...';
 
     try {
-      const res = await fetch(`/api/status?flight=${encodeURIComponent(flight)}`);
+      const res = await fetch(`https://flight-booking-y6l6.onrender.com/api/status?flight=${encodeURIComponent(flight)}`, {
+        method: 'GET',
+        mode: 'cors'
+      });
+
       if (!res.ok) throw new Error('Network error');
       const data = await res.json();
 
