@@ -14,7 +14,11 @@ export function setupAirportLookup() {
     resultDiv.innerHTML = '🔍 Searching airport...';
 
     try {
-      const res = await fetch(`/api/airport?city=${encodeURIComponent(city)}`);
+      const res = await fetch(`https://flight-booking-y6l6.onrender.com/api/airport?city=${encodeURIComponent(city)}`, {
+        method: 'GET',
+        mode: 'cors'
+      });
+
       if (!res.ok) throw new Error('Network error');
       const data = await res.json();
 

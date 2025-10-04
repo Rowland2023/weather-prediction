@@ -1,12 +1,11 @@
-# Use official Node.js image
+# Use lightweight Node image
 FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install --production
+# Install static file server globally
+RUN npm install -g http-server
 
 # Copy all project files
 COPY . .
@@ -14,5 +13,5 @@ COPY . .
 # Expose port
 EXPOSE 3000
 
-# Start the app from root-level server.js
-CMD ["node", "server.js"]
+# Serve the static files from the public directory (adjust if needed)
+CMD ["http-server", "public", "-p", "3000"]
