@@ -1,128 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel Assistant</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Assistant</title>
 
-    <link href="/output.css" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <link href="/output.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    <style>
-        /* Custom Styles to enhance Tailwind and manage layout */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Applied to the active tab button */
-        .tab-btn.active {
-            @apply bg-blue-600 text-white shadow-md;
-        }
-        /* General input styling */
-        .input-modern {
-            @apply w-full p-3 mt-1 mb-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150;
-        }
-        /* Primary button styling */
-        .btn-primary {
-            @apply w-full bg-blue-600 text-white font-semibold py-3 rounded-lg mt-2 hover:bg-blue-700 transition duration-150 shadow-md;
-        }
-        /* Secondary button styling (for Airport/Tips) */
-        .btn-secondary {
-            @apply w-full bg-gray-200 text-gray-700 font-medium py-2 rounded-lg mt-2 hover:bg-gray-300 transition duration-150;
-        }
-        /* Result block styling - visually distinct */
-        .result-block {
-            @apply mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-inner text-sm;
-        }
-        /* Toast styling */
-        .toast-modern {
-            @apply fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-3 rounded-xl shadow-2xl opacity-0 transition-opacity duration-500 z-50;
-        }
-        .toast-modern.show {
-            opacity: 1;
-        }
-    </style>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .toast {
+      @apply fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded opacity-0 transition-opacity duration-500 z-50;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 p-4 w-[320px] text-gray-800">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 text-gray-800">
 
-    <header class="text-center mb-5">
-        <h1 class="text-2xl font-bold text-gray-900">✈️ Travel Assistant</h1>
-    </header>
+  <div class="max-w-md w-full space-y-6">
+    <h1 class="text-2xl font-bold text-center">✈️ Travel Assistant</h1>
 
-    <div class="flex justify-between p-1 bg-gray-200 rounded-xl mb-6 shadow-inner">
-        <button id="tabWeather" class="tab-btn active flex-1 py-2 rounded-xl text-sm font-medium transition duration-150">Weather</button>
-        <button id="tabBooking" class="tab-btn flex-1 py-2 rounded-xl text-sm font-medium transition duration-150">Booking</button>
-        <button id="tabStatus" class="tab-btn flex-1 py-2 rounded-xl text-sm font-medium transition duration-150">Status</button>
+    <!-- Weather Card -->
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-lg font-semibold mb-2">☁️ Weather</h2>
+      <label for="location" class="block text-sm font-medium">City / Location</label>
+      <input type="text" id="location" class="w-full p-2 mt-1 border border-gray-300 rounded" placeholder="e.g. Lagos" />
+      <button id="getWeatherBtn" class="w-full bg-blue-600 text-white py-2 rounded mt-3 hover:bg-blue-800">Get Weather</button>
+      <div id="weatherResult" class="mt-3 p-2 bg-gray-100 rounded text-sm hidden"></div>
     </div>
 
-    <div id="contentWeather" class="tab-content">
-        <label for="location" class="text-sm font-medium block">City / Location</label>
-        <input type="text" id="location" class="input-modern" placeholder="e.g. Lagos, Abuja, New York" />
-        <button id="getWeatherBtn" class="btn-primary">☁️ Get Weather</button>
-        <div id="weatherResult" class="result-block hidden"></div>
-        
-        <button id="lookupAirportBtn" class="btn-secondary mt-4">📍 Lookup Nearby Airport</button>
-        <div id="airportResult" class="result-block hidden"></div>
+    <!-- Airport Lookup Card -->
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-lg font-semibold mb-2">📍 Airport Lookup</h2>
+      <button id="lookupAirportBtn" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-800">Lookup Airport</button>
+      <div id="airportResult" class="mt-3 p-2 bg-gray-100 rounded text-sm hidden"></div>
     </div>
 
-    <div id="contentBooking" class="tab-content hidden">
-        <label for="destination" class="text-sm font-medium block">Destination</label>
-        <input type="text" id="destination" class="input-modern" placeholder="e.g. London" />
-        
-        <label for="date" class="text-sm font-medium block">Travel Date</label>
-        <input type="date" id="date" class="input-modern" />
-        
-        <button id="bookFlightBtn" class="btn-primary">🎫 Search & Book Flight</button>
-        <div id="bookingResult" class="result-block hidden"></div>
-
-        <button id="getTipsBtn" class="btn-secondary mt-4">💡 Get Travel Tips</button>
-        <div id="tipsResult" class="result-block hidden"></div>
+    <!-- Booking Card -->
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-lg font-semibold mb-2">🎫 Book a Flight</h2>
+      <label for="destination" class="block text-sm font-medium">Destination</label>
+      <input type="text" id="destination" class="w-full p-2 mt-1 border border-gray-300 rounded" placeholder="e.g. London" />
+      <label for="date" class="block text-sm font-medium mt-3">Date</label>
+      <input type="date" id="date" class="w-full p-2 mt-1 border border-gray-300 rounded" />
+      <button id="bookFlightBtn" class="w-full bg-green-600 text-white py-2 rounded mt-3 hover:bg-green-800">Book Flight</button>
+      <div id="bookingResult" class="mt-3 p-2 bg-gray-100 rounded text-sm hidden"></div>
     </div>
 
-    <div id="contentStatus" class="tab-content hidden">
-        <label for="flightNumber" class="text-sm font-medium block">Flight Number</label>
-        <input type="text" id="flightNumber" class="input-modern" placeholder="e.g. NG101, BA249" />
-        
-        <button id="checkStatusBtn" class="btn-primary">🕒 Check Flight Status</button>
-        <div id="statusResult" class="result-block hidden"></div>
+    <!-- Status Card -->
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-lg font-semibold mb-2">🕒 Flight Status</h2>
+      <label for="flightNumber" class="block text-sm font-medium">Flight Number</label>
+      <input type="text" id="flightNumber" class="w-full p-2 mt-1 border border-gray-300 rounded" placeholder="e.g. NG101" />
+      <button id="checkStatusBtn" class="w-full bg-purple-600 text-white py-2 rounded mt-3 hover:bg-purple-800">Check Status</button>
+      <div id="statusResult" class="mt-3 p-2 bg-gray-100 rounded text-sm hidden"></div>
     </div>
 
-    <div id="toast" class="toast-modern">Notification</div>
+    <!-- Tips Card -->
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-lg font-semibold mb-2">💡 Travel Tips</h2>
+      <button id="getTipsBtn" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">Get Tips</button>
+      <div id="tipsResult" class="mt-3 p-2 bg-gray-100 rounded text-sm hidden"></div>
+    </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.tab-btn');
-            const contents = document.querySelectorAll('.tab-content');
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Notification</div>
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const targetId = tab.id.replace('tab', 'content');
-                    
-                    // Deactivate all tabs and hide all content
-                    tabs.forEach(t => t.classList.remove('active'));
-                    contents.forEach(c => c.classList.add('hidden'));
-
-                    // Activate the clicked tab and show the target content
-                    tab.classList.add('active');
-                    document.getElementById(targetId).classList.remove('hidden');
-                });
-            });
-            // Initial load: ensure weather result blocks are shown if they have content
-            const weatherResult = document.getElementById('weatherResult');
-            const airportResult = document.getElementById('airportResult');
-            if (weatherResult.textContent.trim() !== '') {
-                weatherResult.classList.remove('hidden');
-            }
-            if (airportResult.textContent.trim() !== '') {
-                airportResult.classList.remove('hidden');
-            }
-        });
-    </script>
-    <script type="module" src="/popup/main.js"></script>
-    <script type="module" src="/popup/utils.js"></script>
-    <script type="module" src="/popup/airport.js"></script>
-    <script type="module" src="/popup/booking.js"></script>
-    <script type="module" src="/popup/status.js"></script>
-    <script type="module" src="/popup/tips.js"></script>
-    <script type="module" src="/popup/weather.js"></script>
+  <!-- Scripts -->
+  <script type="module" src="/popup/main.js"></script>
+  <script type="module" src="/popup/utils.js"></script>
+  <script type="module" src="/popup/airport.js"></script>
+  <script type="module" src="/popup/booking.js"></script>
+  <script type="module" src="/popup/status.js"></script>
+  <script type="module" src="/popup/tips.js"></script>
+  <script type="module" src="/popup/weather.js"></script>
 </body>
 </html>
