@@ -17,10 +17,12 @@ app.get('/', (req, res) => {
 app.use('/api', createProxyMiddleware({
   target: 'https://flight-booking-y6l6.onrender.com',
   changeOrigin: true,
-  pathRewrite: { '^/api': '' },
+  // ❌ Remove pathRewrite entirely or keep it as-is
+  // ✅ This keeps /api/weather as /api/weather
   timeout: 10000,
   proxyTimeout: 10000
 }));
+
 
 // ✅ Log incoming requests for debugging
 app.use((req, res, next) => {
