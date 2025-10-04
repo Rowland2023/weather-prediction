@@ -12,7 +12,6 @@ RUN npm install --production
 COPY . .
 
 # Expose port
-EXPOSE 3000
+EXPOSE 5000
+CMD ["python", "app.py"]
 
-# Start the app from root-level server.js
-CMD ["node", "server.js"]
